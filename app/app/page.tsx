@@ -4,9 +4,10 @@ import Search from "./Searchbar";
 
 export default function Home() {
   return (
-    
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Search />
+    <main className="">
+      {/* <UserAuthentication /> */}
+      <p>HelloWorld!</p>
+      <p>eloooo</p>
     </main>
   );
 }
