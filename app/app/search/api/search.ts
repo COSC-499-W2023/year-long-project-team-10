@@ -14,7 +14,6 @@ export default async function handler(
 
             // Extract the "q" query parameter from the request
             const {q: query} = req.query;
-
             if (typeof query !== "string"){
                 throw new Error("request not a string");
             }
@@ -38,7 +37,8 @@ export default async function handler(
                 },
                
             });
-            res.status(200).json({findInfo});
+            //res.status(200).json({findInfo});
+            res.status(200).json({message: "It's working"});
 
         } catch (error){
             res.status(500).end();

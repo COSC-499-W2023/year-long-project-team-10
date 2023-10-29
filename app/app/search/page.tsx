@@ -21,7 +21,7 @@ const SearchPage = () => {
 
     // Use the useSWR hook to fetch data from the specified URL
     const {data, isLoading} = useSWR<{findInfo: Array<member>}>(
-        `/search?q=${enSearchQ}` ,
+        `./api/search?q=${enSearchQ}` , // I think the issue is starting from here
         fetchInfo
         );
         
