@@ -1,8 +1,10 @@
 "use client"
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
+import {member} from "@prisma/client";
 
-const fetchPosts = async (url: string) => {
+// Function to fetch data from the specified URL
+const fetchInfo = async (url: string) => {
     const resp = await fetch(url);
 
     if (!resp.ok) {
@@ -15,15 +17,26 @@ const fetchPosts = async (url: string) => {
 const SearchPage = () => {
     const search = useSearchParams();
     const searchQ = search ? search.get("q") : null;
-
     const enSearchQ = encodeURI(searchQ || "");
-    const {data, isLoading} = useSWR(
-        `/search/api/search?q=${enSearchQ}` ,
-        fetchPosts
+
+    // Use the useSWR hook to fetch data from the specified URL
+    const {data, isLoading} = useSWR<{findInfo: Array<member>}>(
+        `/search?q=${enSearchQ}` ,
+        fetchInfo
         );
+        
+    if (!data?.findInfo){
+        return null;
+    }
 
 
     console.log("Search Params", enSearchQ);
+
+    // Render the data from the response
+    return <div>{data.findInfo.map((member) => (
+        <div>{member.name}</div>
+    ))}
+    </div>
 
 }
 
