@@ -19,6 +19,8 @@
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
     "formik": "^2.4.5",
+    "htmx.org": "^1.9.8",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.288.0",
     "next": "^13.5.4",
     "pg-promise": "^11.5.4",

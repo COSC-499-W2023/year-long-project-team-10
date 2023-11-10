@@ -5,41 +5,15 @@ import Link from "next/link";
 import "remixicon/fonts/remixicon.css";
 import Image from "next/image";
 
+import DropMenu from "./DropMenu";
+
 import Logo from "../../images/TheSomethingSomethingCompanyLogoV2.svg";
 import Penguin from "../../images/ExamplePenguin.jpeg";
 
 export default function Navbar() {
-  const [displayIcon, setDisplayIcon] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [disableDropdown, setDisableDropdown] = useState(false);
   var [loggedIn, setLoggedIn] = useState(false);
-
-  //   if (localStorage.getItem("loggedIn")) {
-  //     loggedIn = true;
-  //   }
-
-  function login() {
-    setLoggedIn(true);
-  }
-
-  function logout() {
-    localStorage.removeItem("loggedIn");
-    setLoggedIn(false);
-  }
-
-  function smallLogin() {
-    // setLoggedIn(true)
-    handleIcon();
-  }
-
-  function smallLogout() {
-    localStorage.removeItem("loggedIn");
-    setLoggedIn(false);
-    handleIcon();
-  }
-
-  const handleIcon = () => {
-    setDisplayIcon(!displayIcon);
-  };
 
   useEffect(() => {
     if (window.localStorage.getItem("loggedIn")) {
@@ -51,7 +25,6 @@ export default function Navbar() {
     if (!loggedIn) window.localStorage.removeItem("loggedIn");
   }, [loggedIn]);
 
-  // return (
   //   <header className="bg-slate-950 text-white w-full fixed top-0 left-0 z-10 text-1xl">
   //     <nav className="max-w-full mx-1 h-[50px] flex justify-between items-center p-3">
   //       <div>
@@ -178,7 +151,7 @@ export default function Navbar() {
   //   </header>
   // );
   return (
-    <nav className="fixed top-0 left-0 z-50 w-screen p-8 flex flex-row justify-between items-center text-lg">
+    <nav className="fixed top-0 left-0 z-50 w-screen px-8 py-4 flex flex-row justify-between items-center text-[1rem]">
       <section>
         <Link href={"./"}>
           <Image src={Logo} alt={"TheSomethingSomethingCompany"}></Image>
@@ -211,23 +184,40 @@ export default function Navbar() {
             >
               CHATS
             </Link>
-            <div className="hover:bg-[#f7f7f7] p-4 rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-              <section className="flex flex-row items-center justify-center">
-                <i className="ri-arrow-drop-down-line px-2 text-4xl"></i>
-                <p className="px-4">
-                  <span className="font-bold">
-                    WELCOME,
-                    <br />
-                  </span>
-                  SATANSHU
-                </p>
-                <Image
-                  src={Penguin}
-                  alt={"Profile Picture"}
-                  className="w-14 h-1w-14 rounded-full"
-                ></Image>
-              </section>
-            </div>
+            <section
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+              style={
+                {
+                  hoverColor: disableDropdown ? "transparent" : "#f7f7f7",
+                } as any
+              }
+            >
+              <div className="hover:bg-[hoverColor] px-4 py-2 rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
+                <section className="flex flex-row items-center justify-center">
+                  {!disableDropdown && (
+                    <i className="ri-arrow-drop-down-line text-4xl"></i>
+                  )}
+                  <p className="px-4">
+                    <span className="font-bold">
+                      WELCOME,
+                      <br />
+                    </span>
+                    SATANSHU
+                  </p>
+                  <Image
+                    src={Penguin}
+                    alt={"Profile Picture"}
+                    className="w-14 h-1w-14 rounded-full"
+                  ></Image>
+                </section>
+              </div>
+              {!disableDropdown && (
+                <div className="relative">
+                  <DropMenu isOpen={isOpen} />
+                </div>
+              )}
+            </section>
           </section>
         </section>
       )}

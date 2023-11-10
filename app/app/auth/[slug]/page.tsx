@@ -111,16 +111,14 @@ export default function UserAuthentication({ params }: userauthprops) {
     username: string;
     email: string;
     password: string;
-    // terms: boolean;
     // organization: string;
   }) => {
-    // e.preventDefault();
     try {
       if (!terms) {
         throw new Error("Please accept the terms and conditions");
       }
+
       const body = {
-        // id: "93ae1c98-0b2a-4d47-b4d8-c65e4a58eafd",
         name: values.firstname + values.lastname,
         username: values.username,
         email: values.email,
@@ -138,7 +136,7 @@ export default function UserAuthentication({ params }: userauthprops) {
       // });
       console.log("Success");
       console.log(response);
-      router.push("/createProfile");
+      // router.push("/createProfile");
     } catch (error) {
       console.log(error);
     }
