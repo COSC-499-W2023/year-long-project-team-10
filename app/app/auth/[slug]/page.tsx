@@ -192,8 +192,6 @@ export default function UserAuthentication({ params }: userauthprops) {
     window.localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
   }, [loggedIn]);
 
-  console.log(formikSignIn.values);
-
   return showSignIn ? (
     <section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 w-full h-screen">
       <div className="flex flex-col justify-center items-start p-20 w-full h-full">
