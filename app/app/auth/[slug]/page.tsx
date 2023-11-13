@@ -134,7 +134,7 @@ export default function UserAuthentication({ params }: userauthprops) {
       //   body: JSON.stringify(body),
       //   cache: "no-cache",
       // });
-      console.log("Success");
+      console.log("Successs");
       console.log(response);
       // router.push("/createProfile");
     } catch (error) {
@@ -167,8 +167,8 @@ export default function UserAuthentication({ params }: userauthprops) {
       //   cache: "no-cache",
       // });
       console.log("Logged In Successfully!");
-      console.log(response);
-      setLoggedIn(response);
+      // console.log(response);
+      // setLoggedIn(response);
       // router.push("/weee");
     } catch (error) {
       console.log(error);
