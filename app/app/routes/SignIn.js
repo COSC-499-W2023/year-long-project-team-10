@@ -33,14 +33,41 @@ router.post("/api", async (req, res) => {
     console.log("SUCCESS 201");
     console.log(member);
     res.json({
-      data: member,
+      data: { ...member },
       status: 201,
       message: "User SignIn Successful",
+      pgErrorObject: null,
     });
   } catch (error) {
-    console.log(error);
-    console.log("FAIL 501");
-    res.json({ status: 501, message: "Failed to SignIn User" });
+    console.log(typeof error.received);
+    if (error.name === "QueryResultError") {
+      console.log("[SIGN-IN]: INVALID CREDENTIALS");
+      console.log({
+        data: null,
+        status: 404,
+        message: "Invalid Credentials",
+        pgErrorObject: {
+          ...error,
+        },
+      });
+      return res.json({
+        data: null,
+        status: 404,
+        message: "Invalid Credentials",
+        pgErrorObject: {
+          ...error,
+        },
+      });
+    }
+    console.log("[SIGN-IN]: SERVER ERROR");
+    res.json({
+      data: null,
+      status: 500,
+      message: "Invalid Credentials",
+      pgErrorObject: {
+        ...error,
+      },
+    });
   }
 });
 

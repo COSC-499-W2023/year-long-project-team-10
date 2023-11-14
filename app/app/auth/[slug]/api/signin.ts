@@ -11,11 +11,13 @@ export default async function SignIn(values: {
   });
   let resBody: {
     data: {
-      id: string | null;
-    };
+      id: string;
+    } | null;
     status: number;
     message: string;
+    pgErrorMessage: any;
   } = await response.json();
+  console.log(resBody);
   if (resBody.status == 201) return resBody.data;
-  else if (resBody.status == 422 || resBody.status == 500) return false;
+  else if (resBody.status == 404 || resBody.status == 500) return false;
 }
