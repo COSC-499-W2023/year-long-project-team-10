@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import SignUp from "./api/signup";
 import SignIn from "./api/signin";
 import Input from "@/app/components/formComponents/Input";
+import Member from "@/app/types/Member";
 
 // TYPE DEFINITION OF USER PROPS
 type userauthprops = {
@@ -118,7 +119,7 @@ export default function UserAuthentication({ params }: userauthprops) {
         throw new Error("Please accept the terms and conditions");
       }
 
-      const body = {
+      const body: Member = {
         name: values.firstname + values.lastname,
         username: values.username,
         email: values.email,
@@ -128,14 +129,9 @@ export default function UserAuthentication({ params }: userauthprops) {
 
       const response = await SignUp(body);
 
-      // const respose = await fetch(`/auth/${params.slug}/api/signup`, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(body),
-      //   cache: "no-cache",
-      // });
       console.log("Successs");
       console.log(response);
+
       // router.push("/createProfile");
     } catch (error) {
       console.log(error);
@@ -154,6 +150,7 @@ export default function UserAuthentication({ params }: userauthprops) {
       };
       const isEmail = emailRegex.test(values.identifier);
 
+      const response = await SignIn(body);
       // const response = await SignIn({
       //   identifier: values.identifier,
       //   password: values.password,
@@ -167,7 +164,7 @@ export default function UserAuthentication({ params }: userauthprops) {
       //   cache: "no-cache",
       // });
       console.log("Logged In Successfully!");
-      // console.log(response);
+      console.log(response);
       // setLoggedIn(response);
       // router.push("/weee");
     } catch (error) {
@@ -219,14 +216,12 @@ export default function UserAuthentication({ params }: userauthprops) {
             onBlur={formikSignIn.handleBlur}
           />
           <div className="w-full flex justify-between items-end">
-            <a href="/createProfile">
-              <button
-                className="h-fit my-2 p-2 text-xl font-normal rounded-lg bg-black border-2 border-black hover:bg-white text-white hover:text-black transition-all duration-300 ease-in-out"
-                type="button"
-              >
-                Sign In
-              </button>
-            </a>
+            <button
+              className="h-fit my-2 p-2 text-xl font-normal rounded-lg bg-black border-2 border-black hover:bg-white text-white hover:text-black transition-all duration-300 ease-in-out"
+              type="submit"
+            >
+              Sign In
+            </button>
             <div className="flex flex-col items-end">
               <p className="text-xl font-normal pb-2">Not a member?</p>
               <button

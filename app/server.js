@@ -19,8 +19,11 @@ const createProfileRoutes = require("./app/routes/Profile"); // profileRoute wil
 server.use("/createAProfile", createProfileRoutes); // Any time /createAProfile is put within URL, you tell express to utilize the routes present in createProfileRoutes = './routes/Profile'
 
 //Any Routes
-const signupRoutes = require("./app/routes/SignUp"); // profileRoute will equal to the "router" object exported from routes/Profile.js
-server.use("/signup", signupRoutes); // Any time Un-Authput within URL, you tell express to utilize the routes present in createProfileRoutes = './routes/Profile'
+const signupRoutes = require("./app/routes/SignUp");
+server.use("/signup", signupRoutes);
+
+const signinRoutes = require("./app/routes/SignIn");
+server.use("/signin", signinRoutes);
 
 server.listen(PORT, () => {
   console.log("Server started on http://localhost:6969");

@@ -3,21 +3,19 @@ export default async function SignIn(values: {
   password: string;
   isEmail: boolean;
 }) {
-  const url = values.isEmail
-    ? `/auth/signin/api/signin/emailSign`
-    : `/auth/signin/api/signin/usernameSign`;
-
-  console.log("TEST URL: " + url);
-  const response = await fetch(`${url}`, {
+  const response = await fetch(`http://localhost:6969/signin/api`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      identifier: values.identifier,
-      password: values.password,
-    }),
+    body: JSON.stringify(values),
     cache: "no-cache",
   });
-  // console.log("AWIAT" + response);
-  let res = JSON.parse(await response.text());
-  return res.data ? res.data.username : res.status;
+  let resBody: {
+    data: {
+      id: string | null;
+    };
+    status: number;
+    message: string;
+  } = await response.json();
+  if (resBody.status == 201) return resBody.data;
+  else if (resBody.status == 422 || resBody.status == 500) return false;
 }

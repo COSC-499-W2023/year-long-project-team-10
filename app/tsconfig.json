@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "__tests__/createProfile.test.mjs",
-    "app/routes/SignUp.js"
+    "app/routes/SignUp.js",
+    "app/routes/SignIn.js"
   ],
   "exclude": ["node_modules"]
 }
