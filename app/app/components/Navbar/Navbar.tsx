@@ -56,9 +56,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* <div className="hidden md:block md:w-1/4">
+        {<div className="hidden md:block md:w-1/4">
           <Search />
-        </div> */}
+        </div>}
 
         {/* large screen */}
         <ul className="hidden md:flex">
