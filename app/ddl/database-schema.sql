@@ -1,9 +1,15 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE member (
+<<<<<<< HEAD
   "memberID" UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
   "username" TEXT UNIQUE NOT NULL,
   "email" TEXT UNIQUE,
+=======
+  "memberID" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "email" TEXT UNIQUE NOT NULL,
+  "username" TEXT UNIQUE NOT NULL,
+>>>>>>> 905c9c7f29a6fee09c93efc774d218ea876bc0ac
   "name" TEXT NOT NULL,
   "password" TEXT NOT NULL,
   "isOrg" BOOLEAN DEFAULT FALSE
@@ -50,4 +56,30 @@ CREATE TABLE profile_picture (
     image bytea,
     foreign key ("memberID") references member("memberID")
     	on delete cascade on update cascade
+<<<<<<< HEAD
 );
+=======
+);
+
+CREATE TABLE chat(
+  "chatID" SERIAL PRIMARY KEY,
+  "memberID1" uuid NOT NULL,
+  "memberID2" uuid NOT NULL,
+  FOREIGN KEY ("memberID1") REFERENCES member("memberID")
+    ON DELETE CASCADE ON UPDATE CASCADE,    
+  FOREIGN KEY ("memberID2") REFERENCES member("memberID")
+  	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE message(
+  "messageID" SERIAL PRIMARY KEY,
+  "chatID" int NOT NULL,
+  "senderID" uuid NOT NULL,
+  "message" TEXT NOT NULL,
+  FOREIGN KEY ("chatID") REFERENCES chat("chatID")
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY ("senderID") REFERENCES member("memberID")
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+>>>>>>> 905c9c7f29a6fee09c93efc774d218ea876bc0ac

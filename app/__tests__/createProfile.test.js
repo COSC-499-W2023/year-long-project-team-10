@@ -129,7 +129,7 @@ describe("createAProfile", () => {
         const countryInput = getByLabelText(/Country Of Residence/);
         await userEvent.type(countryInput, "Canada");
 
-        const submitButton = getByText(/SUBMIT/); 
+        const submitButton = getByText(/Create Profile/); 
         await submitButton.click();
 
         const addrErrorMsgElement = queryByText(/You cannot leave this field empty! Please enter your address/);
@@ -143,7 +143,7 @@ describe("createAProfile", () => {
 
 
 describe("createAProfile", () =>{
-it("Ensure profile can be created given correct fields", async()=>{
+    it("Ensure profile can be created given correct fields", async()=>{
     
         const mockRequest = {
             fullName: "John Doe",

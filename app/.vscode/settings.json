@@ -1,5 +1,8 @@
 {
+<<<<<<< HEAD
   "editor.lineNumbers": "relative",
+=======
+>>>>>>> 905c9c7f29a6fee09c93efc774d218ea876bc0ac
   "codesnap.realLineNumbers": true,
   "codesnap.shutterAction": "copy"
 }

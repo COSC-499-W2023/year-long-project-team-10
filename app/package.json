@@ -19,14 +19,20 @@
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
     "formik": "^2.4.5",
+<<<<<<< HEAD
     "htmx.org": "^1.9.8",
     "jsonwebtoken": "^9.0.2",
+=======
+>>>>>>> 905c9c7f29a6fee09c93efc774d218ea876bc0ac
     "lucide-react": "^0.288.0",
     "next": "^13.5.4",
     "pg-promise": "^11.5.4",
     "react": "^18.2.0",
     "react-dom": "^18",
+<<<<<<< HEAD
     "remixicon": "^3.5.0",
+=======
+>>>>>>> 905c9c7f29a6fee09c93efc774d218ea876bc0ac
     "swr": "^2.2.4",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
