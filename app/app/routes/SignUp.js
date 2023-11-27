@@ -9,15 +9,17 @@ router.post("/api", async (req, res) => {
 
   const { name, username, email, password, isorganization } = req.body;
   try {
-    console.log("IN TRY");
+    console.log("[SIGN-UP]: IN TRY");
     if (name == "" || email == "" || username == "" || password == "") {
-      console.log("EMPTY FIELDS");
+      console.log("[ERROR]: EMPTY FIELDS");
       return res.json({
-        status: 422,
-        message: "Please enter all required fields",
+        data: null,
+        status: 400,
+        message: "Missing Fields. Please ensure all fields are filled out.",
+        pgErrorObject: null,
       });
     }
-    let member = await db.none(
+    await db.none(
       'INSERT INTO member("name", "username", "email", "password", "isOrg") VALUES($1, $2, $3, $4, $5)',
       [
         name,
@@ -30,16 +32,36 @@ router.post("/api", async (req, res) => {
         isorganization,
       ]
     );
-    console.log("SUCCESS 201");
+    let memberData = await db.one(
+      'SELECT "memberID" FROM member WHERE "username" = $1',
+      [username]
+    );
+    console.log("[SUCCESS]: SIGN-UP SUCCESSFUL");
+    console.log("[RESPONSE DATA]\n" + memberData);
     res.json({
-      data: member,
+      data: { id: memberData.memberID },
       status: 201,
       message: "User SignUp Successful",
+      pgErrorObject: null,
     });
   } catch (error) {
-    console.log(error);
-    console.log("FAIL 501");
-    res.json({ status: 501, message: "Failed to Add User" });
+    console.log(typeof error.received);
+    console.log({
+      data: null,
+      status: 500,
+      message: "User SignUp Failed",
+      pgErrorObject: {
+        ...error,
+      },
+    });
+    res.json({
+      data: null,
+      status: 500,
+      message: "User SignUp Failed",
+      pgErrorObject: {
+        ...error,
+      },
+    });
   }
 });
 

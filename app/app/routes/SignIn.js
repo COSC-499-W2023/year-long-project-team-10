@@ -33,7 +33,7 @@ router.post("/api", async (req, res) => {
     console.log("SUCCESS 201");
     console.log(member);
     res.json({
-      data: { ...member },
+      data: { id: member.memberID },
       status: 201,
       message: "User SignIn Successful",
       pgErrorObject: null,
@@ -63,7 +63,7 @@ router.post("/api", async (req, res) => {
     res.json({
       data: null,
       status: 500,
-      message: "Invalid Credentials",
+      message: "User SignIn Failed",
       pgErrorObject: {
         ...error,
       },

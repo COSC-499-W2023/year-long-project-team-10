@@ -12,12 +12,15 @@ export default async function SignUp(values: {
     cache: "no-cache",
   });
   let resBody: {
-    data: any;
+    data: {
+      id: string;
+    } | null;
     status: number;
     message: string;
+    pgErrorMessage: any;
   } = await response.json();
-  console.log(resBody.message);
-  console.log(resBody.status);
-  if (resBody.status == 201) return resBody.data;
-  else if (resBody.status == 422 || resBody.status == 500) return false;
+  console.log(resBody);
+  return resBody;
+  // if (resBody.status == 201) return resBody.data;
+  // else if (resBody.status == 422 || resBody.status == 500) return false;
 }

@@ -18,6 +18,7 @@ export default async function SignIn(values: {
     pgErrorMessage: any;
   } = await response.json();
   console.log(resBody);
-  if (resBody.status == 201) return resBody.data;
-  else if (resBody.status == 404 || resBody.status == 500) return false;
+  return resBody;
+  // if (resBody.status == 201) return resBody.data;
+  // else if (resBody.status == 404 || resBody.status == 500) return false;
 }
