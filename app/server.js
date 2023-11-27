@@ -22,6 +22,9 @@ server.use("/createAProfile", createProfileRoutes); // Any time /createAProfile 
 const signupRoutes = require("./app/routes/SignUp");
 server.use("/signup", signupRoutes);
 
+const deleteuserRoutes = require("./app/routes/DeleteUser");
+server.use("/deleteuser", deleteuserRoutes);
+
 const signinRoutes = require("./app/routes/SignIn");
 server.use("/signin", signinRoutes);
 
