@@ -18,12 +18,30 @@ describe("Create an Account", () => {
       isorganization: false,
     };
     const response: AuthResponse = await SignUp(request);
-    console.log(response);
     expect(response.status).toEqual(201);
     expect(response.message).toEqual("User SignUp Successful");
-    expect(response.pgErrorMessage).toBeFalsy();
+    expect(response.pgErrorObject).toBeFalsy();
     expect(response.data).toBeTruthy();
   });
+  it("Ensure profile cannot be created if profile with similar credentials already exists", async () => {
+    const request: Member = {
+      name: "John Murphy Doe",
+      username: "JMurphyDoe",
+      email: "j.murphy.doe@email.com",
+      password: "ThisIsTheSafestPasswordEver@123456#",
+      isorganization: false,
+    };
+    const response: AuthResponse = await SignUp(request);
+    expect(response.status).toEqual(500);
+    expect(response.message).toEqual("User SignUp Failed");
+    expect(response.data).toBeFalsy();
+    expect(response.pgErrorObject).toBeTruthy();
+  });
+});
+
+// describe("Create an Account Unsuccessfully", () => {});
+
+describe("Login to an Account Successfully", () => {
   it("Ensure user can sign in using email given the correct credentials", async () => {
     const request = {
       identifier: "j.murphy.doe@email.com",
@@ -31,10 +49,9 @@ describe("Create an Account", () => {
       isEmail: true,
     };
     const response: AuthResponse = await SignIn(request);
-    console.log(response);
     expect(response.status).toEqual(201);
     expect(response.message).toEqual("User SignIn Successful");
-    expect(response.pgErrorMessage).toBeFalsy();
+    expect(response.pgErrorObject).toBeFalsy();
     expect(response.data).toBeTruthy();
   });
   it("Ensure user can sign in using username given the correct credentials", async () => {
@@ -44,10 +61,9 @@ describe("Create an Account", () => {
       isEmail: false,
     };
     const response: AuthResponse = await SignIn(request);
-    console.log(response);
     expect(response.status).toEqual(201);
     expect(response.message).toEqual("User SignIn Successful");
-    expect(response.pgErrorMessage).toBeFalsy();
+    expect(response.pgErrorObject).toBeFalsy();
     expect(response.data).toBeTruthy();
   });
 });

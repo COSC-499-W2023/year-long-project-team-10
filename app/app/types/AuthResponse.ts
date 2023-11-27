@@ -4,5 +4,5 @@ export default interface SignUpResponse {
   } | null;
   status: number;
   message: string;
-  pgErrorMessage: any;
+  pgErrorObject: any;
 }

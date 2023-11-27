@@ -1,3 +1,4 @@
+import AuthResponse from "../../types/AuthResponse";
 export default async function SignIn(values: {
   identifier: string;
   password: string;
@@ -9,15 +10,8 @@ export default async function SignIn(values: {
     body: JSON.stringify(values),
     cache: "no-cache",
   });
-  let resBody: {
-    data: {
-      id: string;
-    } | null;
-    status: number;
-    message: string;
-    pgErrorMessage: any;
-  } = await response.json();
-  console.log(resBody);
+  let resBody: AuthResponse = await response.json();
+  console.log(resBody.message);
   return resBody;
   // if (resBody.status == 201) return resBody.data;
   // else if (resBody.status == 404 || resBody.status == 500) return false;

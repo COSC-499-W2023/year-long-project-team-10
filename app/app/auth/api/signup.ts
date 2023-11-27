@@ -1,3 +1,4 @@
+import AuthResponse from "../../types/AuthResponse";
 export default async function SignUp(values: {
   name: string;
   email: string;
@@ -11,16 +12,7 @@ export default async function SignUp(values: {
     body: JSON.stringify(values),
     cache: "no-cache",
   });
-  let resBody: {
-    data: {
-      id: string;
-    } | null;
-    status: number;
-    message: string;
-    pgErrorMessage: any;
-  } = await response.json();
-  console.log(resBody);
+  let resBody: AuthResponse = await response.json();
+  console.log("[MIDDLEMAN]:\n" + JSON.stringify(resBody));
   return resBody;
-  // if (resBody.status == 201) return resBody.data;
-  // else if (resBody.status == 422 || resBody.status == 500) return false;
 }

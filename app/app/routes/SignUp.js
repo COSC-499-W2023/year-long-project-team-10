@@ -45,15 +45,18 @@ router.post("/api", async (req, res) => {
       pgErrorObject: null,
     });
   } catch (error) {
-    console.log(typeof error.received);
-    console.log({
-      data: null,
-      status: 500,
-      message: "User SignUp Failed",
-      pgErrorObject: {
-        ...error,
-      },
-    });
+    console.log("[ERROR NAME]:\n" + error.name);
+    console.log(
+      "[LOG RESPONSE]:\n" +
+        JSON.stringify({
+          data: null,
+          status: 500,
+          message: "User SignUp Failed",
+          pgErrorObject: {
+            ...error,
+          },
+        })
+    );
     res.json({
       data: null,
       status: 500,
