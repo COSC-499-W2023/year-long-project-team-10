@@ -1,4 +1,5 @@
-import prisma from "../../../../lib/prisma";
+// import prisma from "../../../../lib/prisma";
+import prisma from "../../../lib/prisma";
 import { NextRequest } from "next/server";
 import { HmacSHA256 } from "crypto-js";
 import { Database } from "lucide-react";

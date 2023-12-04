@@ -2,13 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import "remixicon/fonts/remixicon.css";
+// import "remixicon/fonts/remixicon.css";
+// import "remixicon";
 import Image from "next/image";
 
 import DropMenu from "./DropMenu";
 
 import Logo from "../../images/TheSomethingSomethingCompanyLogoV2.svg";
-import Penguin from "../../images/ExamplePenguin.jpeg";
+// import Penguin from "../../images/ExamplePenguin.jpeg";
+import Penguin from "../../images/ExamplePenguin 2.jpeg";
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

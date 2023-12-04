@@ -14,14 +14,14 @@ export default function LandingPage(){
             <div className="w-full h-[630px] top-[184px] absolute">
                 <div className="w-full h-[550px] top-[400px] md:top-[300px] tablet:top-[177px] relative bg-yellow-200" />
                 <div className="w-1/4 tablet:w-3/4 h-[182px] ml-5 top-0 absolute text-left text-black text-4xl font-normal font-['Inter']">The Safest Way to connect with the professionals online.</div>
-                <div className="w-[100px] sm:w-auto h-9 right-0 mr-10 top-[91px] absolute text-center text-black text-2xl font-bold font-['Inter'] hover:text-teal-300"><a href="/signin">Get Started Here</a></div>
+                <div className="w-[100px] sm:w-auto h-9 right-0 mr-10 top-[91px] absolute text-center text-black text-2xl font-bold font-['Inter'] hover:text-teal-300"><a href={"./auth?signin=true"}>Get Started Here</a></div>
             </div>
             
             <div className="w-full h-[800px] top-[900px] absolute">
                 <div className="w-full h-[800px] relative bg-sky-300" />
                 <div className="w-1/8 h-[74px] ml-10 md:right-12 mr-20 top-[121px] absolute text-black text-4xl text-center font-normal font-['Inter']">Verified Professionals</div>
                 <div className="w-3/4 md:w-1/2 tablet:w-[494px] ml-10 md:right-12 top-[210px] absolute text-left text-black text-2xl font-light font-['Inter']">Want expert consultation on your figertips? Be assured with our foolproof, ID verification check.</div>
-                <div className="w-[300px] h-9 md:right-12 md:mr-7 ml-10 top-[450px] absolute text-left text-black text-2xl font-bold font-['Inter'] hover:text-purple-600"><a href="/signin">Find Experts Now</a></div>
+                <div className="w-[300px] h-9 md:right-12 md:mr-7 ml-10 top-[450px] absolute text-left text-black text-2xl font-bold font-['Inter'] hover:text-purple-600"><a href={"./auth?signin=true"}>Find Experts Now</a></div>
             </div>
 
             <div className="w-full h-[800px] top-[1700px] absolute">
