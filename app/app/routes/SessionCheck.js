@@ -4,8 +4,8 @@ const db = require("../db-connection.js");
 const e = require("express");
 
 router.post("/api", async (req, res) => {
-	const memberID = req.session.signUpMemberID; // RETRIEVE SESSION DATA IS USER IS LOGGED IN 
-	console.log("[MEMBER ID IN CREATE PROFILE]: " + memberID);
+	const memberID = req.session.loggedInUserMemberID; // RETRIEVE SESSION DATA IS USER IS LOGGED IN 
+	console.log("[MEMBER ID | SESSION CHECK]: " + memberID);
 	// IF NULL, THEN USER IS NOT SIGNED IN.
 	if (memberID == null) {
 		res.json({ status: 401, message: "Unauthorized access" });

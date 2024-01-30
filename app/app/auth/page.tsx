@@ -11,6 +11,7 @@ import SignIn from "./api/signin";
 import Input from "@/app/components/formComponents/Input";
 import Member from "@/app/types/Member";
 import { useSearchParams } from "next/navigation";
+import Navbar from "../components/Navbar/Navbar";
 
 // TYPE DEFINITION OF USER PROPS
 type userauthprops = {
@@ -176,15 +177,41 @@ export default function UserAuthentication({ params }: userauthprops) {
       }
       else
       {
-      // setLoggedIn(response);
-      // router.push("/searchpage");
+      //setLoggedIn(response);
+      //router.push("/chats");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return showSignIn ? (
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	useEffect(() => {
+		const checkSession = async () => {
+			try {
+				const response = await SessionCheck();
+				console.log(response);
+				if (response.status == 201) {
+					setLoggedIn(true);
+					console.log("User is logged in!");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		checkSession();
+		//setLoggedIn(isLoggedIn);
+		// if (window.localStorage.getItem("loggedIn")) {
+		//   setLoggedIn(true);
+		// }
+	}, []);	
+
+  return (
+	<>
+	<Navbar isLoggedIn={loggedIn} />
+	{showSignIn ? (
     <section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 w-full h-screen">
       <div className="flex flex-col justify-center items-start p-20 w-full h-full">
         <h1 className="font-bold text-6xl mb-4">Sign In</h1>
@@ -475,5 +502,7 @@ export default function UserAuthentication({ params }: userauthprops) {
         </form>
       </div>
     </section>
-  );
+  )}
+  </>
+	);
 }

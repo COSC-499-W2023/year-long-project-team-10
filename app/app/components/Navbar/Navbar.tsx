@@ -9,12 +9,11 @@ import DropMenu from "./DropMenu";
 
 import Logo from "../../images/TheSomethingSomethingCompanyLogoV2.svg";
 import Penguin from "../../images/ExamplePenguin.jpeg";
-
 import SessionCheck from "@/app/auth/api/sessionCheck";
-
 type NavBarProps = {
 	isLoggedIn: boolean;
 };
+
 
 export default function Navbar({ isLoggedIn }: NavBarProps) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +35,7 @@ export default function Navbar({ isLoggedIn }: NavBarProps) {
 		};
 
 		checkSession();
-		//setLoggedIn(isLoggedIn);
+		setLoggedIn(isLoggedIn);
 		// if (window.localStorage.getItem("loggedIn")) {
 		//   setLoggedIn(true);
 		// }
@@ -54,6 +53,9 @@ export default function Navbar({ isLoggedIn }: NavBarProps) {
 						src={Logo}
 						alt={"TheSomethingSomethingCompany"}
 					></Image>
+				</Link>
+				<Link href={"./search"}>
+					<i className="ri-search-line text-[24px]"></i>
 				</Link>
 			</section>
 			{!loggedIn && (
