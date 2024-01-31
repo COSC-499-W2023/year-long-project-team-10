@@ -3,15 +3,17 @@ const router = express.Router();
 const db = require("../db-connection.js");
 const cryptojs = require("crypto-js");
 const HmacSHA256 = cryptojs.HmacSHA256;
+const jose = require('jose');
 
 router.post("/api", async (req, res) => {
   console.log(req.body);
 
   const { name, username, email, password, isorganization } = req.body;
   try {
-    console.log("[SIGN-UP]: IN TRY");
+    console.log("[ENDPOINT | SIGN-UP]");
+	// CHECK ALL THE VALUES ARE PRESENT BEFORE INSERTING INTO DB
     if (name == "" || email == "" || username == "" || password == "") {
-      console.log("[ERROR]: EMPTY FIELDS");
+      console.log("[ENDPOINT | ERROR]: EMPTY FIELDS IN BODY");
       return res.json({
         data: null,
         status: 400,

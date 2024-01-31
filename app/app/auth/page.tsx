@@ -171,8 +171,8 @@ export default function UserAuthentication({ params }: userauthprops) {
       console.log(response);
       if(response.status == 205)
       {
-        router.push("/createProfile")
-        return;
+        //router.push("/createProfile")
+        //return;
       }
       else
       {
