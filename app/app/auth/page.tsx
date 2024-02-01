@@ -11,6 +11,8 @@ import SignIn from "./api/signin";
 import Input from "@/app/components/formComponents/Input";
 import Member from "@/app/types/Member";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Logo from "@/app/images/TheSomethingSomethingCompanyLogoV2.svg";
 
 // TYPE DEFINITION OF USER PROPS
 type userauthprops = {
@@ -183,9 +185,19 @@ export default function UserAuthentication({ params }: userauthprops) {
 		}
 	};
 
-	return showSignIn ? (
-		<section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 w-full h-screen">
-			<div className="flex flex-col justify-center items-start p-20 w-full h-full">
+	return (
+		<>
+		<section className="z-50 w-screen p-10 flex flex-row justify-between items-center text-[1rem]">
+				<Link href={"./"}>
+					<Image
+						src={Logo}
+						alt={"TheSomethingSomethingCompany"}
+					></Image>
+				</Link>
+		</section>
+		{showSignIn ? (
+		<section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 w-full h-[50rem]">
+			<div className="flex flex-col justify-center items-start py-0 px-20 w-full h-full">
 				<h1 className="font-bold text-6xl mb-4">Sign In</h1>
 				<form
 					className="flex flex-col items-start my-4 w-full"
@@ -250,7 +262,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 			</div>
 		</section>
 	) : (
-		<section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 h-screen w-full">
+		<section className="grid grid-cols-1 tablet:grid-cols-2 p-0 m-0 h-fit w-full">
 			<div className="hidden tablet:flex flex-col justify-center items-center p-20 w-fit h-full bg-green-600">
 				<div className="w-full">
 					<h1 className="text-6xl text-white font-black pb-4">
@@ -402,5 +414,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 				</form>
 			</div>
 		</section>
+	)}
+	</>
 	);
 }

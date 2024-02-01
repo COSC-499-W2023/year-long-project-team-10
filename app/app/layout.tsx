@@ -13,22 +13,22 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className} relative min-h-screen`}>
-		{
-		//<div className="snow"></div>
-		//<div className="snow2"></div>
-		}
-        <Navbar isLoggedIn={true} />
-		<div>
-			{children}
-		</div>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={`${inter.className} relative min-h-screen`}>
+				{
+					//<div className="snow"></div>
+					//<div className="snow2"></div>
+				}
+				{
+					//<Navbar isLoggedIn={true} />
+				}
+				<div>{children}</div>
+			</body>
+		</html>
+	);
 }

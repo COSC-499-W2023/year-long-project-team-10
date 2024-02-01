@@ -137,3 +137,20 @@ kbd {
 		background-position: 50em 0em;
 	}
 }
+
+input:-webkit-autofill,
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #f4f4f5 inset !important;
+}
+
+input:-webkit-autofill:hover,
+textarea:-webkit-autofill:hover,
+select:-webkit-autofill:hover{
+	-webkit-box-shadow: 0 0 0px 1000px #e4e4e7 inset !important;
+
+}
