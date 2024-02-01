@@ -13,7 +13,7 @@ CREATE TABLE member (
 
 CREATE TABLE profile (
     "memberID" UUID PRIMARY KEY,
-    "name" TEXT NOT NULL,
+    -- "name" TEXT NOT NULL,
     "country" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "bio" TEXT,
@@ -57,6 +57,7 @@ CREATE TABLE chat(
   "chatID" SERIAL PRIMARY KEY,
   "memberID1" uuid NOT NULL,
   "memberID2" uuid NOT NULL,
+  "isPinned" boolean default false,
   FOREIGN KEY ("memberID1") REFERENCES member("memberID")
     ON DELETE CASCADE ON UPDATE CASCADE,    
   FOREIGN KEY ("memberID2") REFERENCES member("memberID")
@@ -67,6 +68,8 @@ CREATE TABLE message(
   "messageID" SERIAL PRIMARY KEY,
   "chatID" int NOT NULL,
   "senderID" uuid NOT NULL,
+  -- "hasAttachments" boolean default false,
+  -- "attachmentID" uuid default null,
   "message" TEXT NOT NULL,
   FOREIGN KEY ("chatID") REFERENCES chat("chatID")
     ON DELETE CASCADE ON UPDATE CASCADE,
