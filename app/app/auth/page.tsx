@@ -55,7 +55,6 @@ export default function UserAuthentication({ params }: userauthprops) {
 			email: "e.g., example@email.com",
 			password: "",
 			confirmpassword: "",
-			// organization: "",
 		},
 		onSubmit: (values: {
 			firstname: string;
@@ -63,7 +62,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 			username: string;
 			email: string;
 			password: string;
-			// organization: string;
+			confirmpassword: string;
 		}) => {
 			submitSignUpData(values);
 		},
@@ -94,7 +93,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 					"Must contain at least one uppercase, one lowercase, one number and one special character and be 8 characters or more in total"
 				)
 				.required(
-					"You cannot leave this field empty! Please enter your password"
+					"You cannot leave this field empty! Please enter your password."
 				),
 		}),
 	});
@@ -136,14 +135,16 @@ export default function UserAuthentication({ params }: userauthprops) {
 		username: string;
 		email: string;
 		password: string;
-		// organization: string;
+		confirmpassword: string;
 	}) => {
 		try {
 			if (!terms) {
 				setHighlightTerms(true);
 				throw new Error("Please accept the terms and conditions");
 			}
-
+			if (values.password !== values.confirmpassword){
+				throw new Error("Passwords do not match! Please try again!")
+			}
 			const body: Member = {
 				name: values.firstname + values.lastname,
 				username: values.username,
@@ -180,11 +181,11 @@ export default function UserAuthentication({ params }: userauthprops) {
 			console.log("Logged In Successfully!");
 			console.log(response);
 			if (response.status == 205) {
-				//router.push("/createProfile")
-				//return;
+				router.push("/createProfile");
+				return;
 			} else {
-				// setLoggedIn(response);
-				// router.push("/searchpage");
+				//setLoggedIn(response);
+				//router.push("/searchpage");
 			}
 		} catch (error) {
 			console.log(error);
@@ -210,7 +211,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 							onSubmit={formikSignIn.handleSubmit}
 						>
 							<Input
-								label="Username"
+								label="Username or Email"
 								type="text"
 								id="identifier"
 								name="identifier"
@@ -325,6 +326,19 @@ export default function UserAuthentication({ params }: userauthprops) {
 							/>
 							<Input
 								label={
+									formik.touched.username && formik.errors.username
+										? formik.errors.username
+										: "Username"
+								}
+								type="text"
+								id="username"
+								name="username"
+								placeholder={formik.values.username}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+							/>
+							<Input
+								label={
 									formik.touched.email && formik.errors.email
 										? formik.errors.email
 										: "Email"
@@ -337,7 +351,12 @@ export default function UserAuthentication({ params }: userauthprops) {
 								onBlur={formik.handleBlur}
 							/>
 							<Input
-								label="Password"
+								label={
+									formik.touched.password &&
+									formik.errors.password
+										? formik.errors.password
+										: "Password"
+								}
 								type="password"
 								id="password"
 								name="password"
@@ -345,17 +364,9 @@ export default function UserAuthentication({ params }: userauthprops) {
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 							/>
-							{formik.touched.password &&
-							formik.errors.password ? (
-								<span className="mb-8 pb-2 text-xl font-semibold">
-									{formik.errors.password}
-								</span>
-							) : (
-								""
-							)}
 							<Input
-								label="Confirm Password"
-								type="confirmpassword"
+								label={formik.touched.confirmpassword && formik.values.password  ? ((formik.values.password !== formik.values.confirmpassword) ? "Passwords do not match" : "Passwords Match") : "Confirm Password"}
+								type="password"
 								id="confirmpassword"
 								name="confirmpassword"
 								placeholder={formik.values.confirmpassword}
@@ -363,27 +374,19 @@ export default function UserAuthentication({ params }: userauthprops) {
 								onBlur={formik.handleBlur}
 							/>
 							<div className="my-4 items-top flex  space-x-2">
-								{/* <Checkbox id="organization" /> */}
-								<div className="grid gap-1.5 leading-none">
-									<label
-										htmlFor="organization"
-										className="text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-									>
-										Sign up as an Organization
-									</label>
-									<p className="text-lg text-muted-foreground">
-										Check this to sign up as an
-										Organization.
-									</p>
-								</div>
-							</div>
-							<div className="mb-4 items-top flex  space-x-2">
 								<Checkbox
 									id="terms"
 									checked={terms}
 									onCheckedChange={(e) => setTerms(!terms)}
 								/>
-								<div className="grid gap-1.5 leading-none" style={{ "--highlightcolor" : highlightTerms ? "#FF0000" : "#000000"}}>
+								<div
+									className="grid gap-1.5 leading-none"
+									style={{
+										"--highlightcolor": highlightTerms
+											? "#FF0000"
+											: "#000000",
+									} as any}
+								>
 									<label
 										htmlFor="terms"
 										className="text-lg text-[--highlightcolor] font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

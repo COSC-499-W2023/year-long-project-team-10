@@ -16,7 +16,6 @@ function CreateProfileForm() {
 	); /* Send this as a reference to OccupationTags */
 	/* OccupationTags will be able to modify currentTags as needed, but CreateProfileForm has access to it */
 	/* Given that currentTags is an object, any change to it in OccupationTags will be reflected in memory */
-	const [fullName, setFullName] = useState("");
 	const [country, setCountry] = useState("");
 	const [address, setAddress] = useState("");
 	const [bio, setBio] = useState("");
@@ -40,8 +39,6 @@ function CreateProfileForm() {
 					/>
 					<FormLabelsAndInputs
 						imageFile={imageFile}
-						fullName={fullName}
-						setFullName={setFullName}
 						country={country}
 						setCountry={setCountry}
 						address={address}
@@ -74,14 +71,10 @@ function FormLabelsAndInputs({ imageFile }) {
 	); /* Send this as a reference to OccupationTags */
 	/* OccupationTags will be able to modify currentTags as needed, but CreateProfileForm has access to it */
 	/* Given that currentTags is an object, any change to it in OccupationTags will be reflected in memory */
-	const [fullName, setFullName] = useState("");
 	const [country, setCountry] = useState("");
 	const [address, setAddress] = useState("");
 	const [bio, setBio] = useState("");
 
-	const [fullNameLabelHTML, setFullNameLabelHTML] = useState({
-		__html: 'Full Name: <span class = "text-red-500"> * </span>',
-	});
 	const [countryLabelHTML, setCountryLabelHTML] = useState({
 		__html: 'Country Of Residence: <span class = "text-red-500"> * </span> ',
 	});
@@ -92,20 +85,6 @@ function FormLabelsAndInputs({ imageFile }) {
 	// Using dangerouslySetInnerHTML allows us to set the innerHTML of a label, which is useful for adding a red asterisk to required fields and for adding error messages
 	// dangerouslySetInnerHTML does not have a security risk here because we are not using user input to set the innerHTML, we are using a string that we have defined ourselves
 	// dangerouslySetInnerHTML does have a security risk if we were to use user input to set the innerHTML, because it would allow users to inject HTML into our page, but since we are using a label and it is not possible to save this HTML to the database or show it to other users, there is no security risk here.
-
-	function onFullNameChange(e) {
-		const value = e.target.value.trim();
-		setFullName(value);
-
-		if (value == "")
-			setFullNameLabelHTML({
-				__html: '<span class = "text-red-500"> You cannot leave this field empty! Please enter your full name:</span>',
-			});
-		else
-			setFullNameLabelHTML({
-				__html: 'Full Name: <span class = "text-red-500"> * </span> ',
-			});
-	}
 
 	function onCountryChange(e) {
 		const value = e.target.value.trim();
@@ -139,10 +118,6 @@ function FormLabelsAndInputs({ imageFile }) {
 	}
 
 	function displayRequiredFields() {
-		if (fullName == "")
-			setFullNameLabelHTML({
-				__html: '<span class = "text-red-500"> You cannot leave this field empty! Please enter your full name:</span>',
-			});
 		if (country == "")
 			setCountryLabelHTML({
 				__html: '<span class = "text-red-500"> You cannot leave this field empty! Please enter your country of residence:</span>',
@@ -157,7 +132,6 @@ function FormLabelsAndInputs({ imageFile }) {
 		const formData = new FormData();
 		console.log("imageFile: ", imageFile);
 		formData.append("profilePicture", imageFile);
-		formData.append("fullName", fullName);
 		formData.append("country", country);
 		formData.append("address", address);
 		formData.append("bio", bio);
@@ -167,7 +141,7 @@ function FormLabelsAndInputs({ imageFile }) {
 
 	async function onSubmit(e) {
 		e.preventDefault();
-		if (fullName != "" && country != "" && address != "") {
+		if (country != "" && address != "") {
 			var response = await createAProfile(collectFormData());
 			if (response.status == 201) {
 				router.push("/chats"); // Code for this page has not been written yet
@@ -184,13 +158,6 @@ function FormLabelsAndInputs({ imageFile }) {
 
 	return (
 		<section className="flex flex-col w-full">
-			<FlexLabelAndTextInput
-				labelVal={fullNameLabelHTML}
-				inputName="fullName"
-				required={true}
-				onChangeFunction={onFullNameChange}
-				placeHolder="e.g., John Wilfred Doe"
-			/>
 			<FlexLabelAndTextInput
 				labelVal={countryLabelHTML}
 				inputName="country"
