@@ -28,7 +28,6 @@ import updateProfileInfo from "../api/saveProfileData";
 
     // Temporary data for the profile
     const [profile, setProfile] = useState({
-      fullName: "",
       userName: "",
       country: "",
       address: "",
@@ -47,8 +46,7 @@ import updateProfileInfo from "../api/saveProfileData";
       const profileData: any = await FetchProfileData({
         id: memberData.data.memberID,
       });
-      setProfile({
-        fullName: memberData.data.name, 
+      setProfile({ 
         userName: memberData.data.username,
         country: profileData.data.country,
         address: profileData.data.address,
@@ -83,7 +81,6 @@ import updateProfileInfo from "../api/saveProfileData";
     {
         console.log("check data: ", tempProfile);
         return {
-            fullName: tempProfile.fullName,
             country: tempProfile.country,
             address: tempProfile.address,
             bio: tempProfile.biography,
@@ -97,7 +94,7 @@ import updateProfileInfo from "../api/saveProfileData";
     async function handleSave(e: { preventDefault: () => void; }) {
       setIsEditing(false);
   
-      if(tempProfile.fullName != "" && tempProfile.country != "" && tempProfile.address != "" && tempProfile.userName != "")
+      if(tempProfile.country != "" && tempProfile.address != "" && tempProfile.userName != "")
       {
           var response = await updateProfileInfo(formDataAsJSON());
           if(response.status == 202)
@@ -126,8 +123,7 @@ import updateProfileInfo from "../api/saveProfileData";
           src={Penguin.src}
           alt="Profile Picture"
         />
-        <div className="my-6">
-          <h1 className="font-bold text-4xl py-1">{profile.fullName}</h1>
+        <div className="my-6"> 
           <h2 className="font-normal text-xl py-1">@ {profile.userName}</h2>
           <h2 className="font-light text-lg py-1 flex flex-row">
             <i className="ri-map-pin-line"></i>
@@ -149,20 +145,6 @@ import updateProfileInfo from "../api/saveProfileData";
       {/*Div for the right box that allows users to edit their profile information*/}
       <div className="flex-1 ml-4 max-w-md border-2 border-gray-400 rounded-xl p-10">
         <div className="space-y-2">
-          {/*First Name*/}
-          <div>
-            <label className="font-bold text-xl mt-2">
-             Name:
-            </label>
-            <input className="max-w-sm border-2 border-gray-800 rounded-xl font-normal text-xl p-1"
-              type="text"
-              value={tempProfile.fullName}
-              required
-              onChange={(e) => setTempProfile({ ...tempProfile, fullName: e.target.value })}
-              readOnly={!isEditing}
-            />
-          </div>
-    
           {/*User name*/}
           <div>
             <label className="font-bold text-xl mt-2">

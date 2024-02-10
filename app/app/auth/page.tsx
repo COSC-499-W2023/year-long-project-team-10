@@ -13,6 +13,7 @@ import Member from "@/app/types/Member";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/app/images/TheSomethingSomethingCompanyLogoV2.svg";
+import { useWebSocket } from "../contexts/WebSocketContext";
 
 // TYPE DEFINITION OF USER PROPS
 type userauthprops = {
@@ -20,6 +21,8 @@ type userauthprops = {
 };
 
 export default function UserAuthentication({ params }: userauthprops) {
+	const { isConnected, sendMessage } = useWebSocket();
+
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -142,8 +145,8 @@ export default function UserAuthentication({ params }: userauthprops) {
 				setHighlightTerms(true);
 				throw new Error("Please accept the terms and conditions");
 			}
-			if (values.password !== values.confirmpassword){
-				throw new Error("Passwords do not match! Please try again!")
+			if (values.password !== values.confirmpassword) {
+				throw new Error("Passwords do not match! Please try again!");
 			}
 			const body: Member = {
 				name: values.firstname + values.lastname,
@@ -181,9 +184,12 @@ export default function UserAuthentication({ params }: userauthprops) {
 			console.log("Logged In Successfully!");
 			console.log(response);
 			if (response.status == 205) {
-				router.push("/createProfile");
-				return;
+				console.log("MESSAGE!");
+				console.log("CONNECTION STATUS: ", isConnected);
+				sendMessage("signedIn", {});
+				//router.push("/createProfile");
 			} else {
+				sendMessage({ action: "signedIn", body: {} });
 				//setLoggedIn(response);
 				//router.push("/searchpage");
 			}
@@ -326,7 +332,8 @@ export default function UserAuthentication({ params }: userauthprops) {
 							/>
 							<Input
 								label={
-									formik.touched.username && formik.errors.username
+									formik.touched.username &&
+									formik.errors.username
 										? formik.errors.username
 										: "Username"
 								}
@@ -365,7 +372,15 @@ export default function UserAuthentication({ params }: userauthprops) {
 								onBlur={formik.handleBlur}
 							/>
 							<Input
-								label={formik.touched.confirmpassword && formik.values.password  ? ((formik.values.password !== formik.values.confirmpassword) ? "Passwords do not match" : "Passwords Match") : "Confirm Password"}
+								label={
+									formik.touched.confirmpassword &&
+									formik.values.password
+										? formik.values.password !==
+											formik.values.confirmpassword
+											? "Passwords do not match"
+											: "Passwords Match"
+										: "Confirm Password"
+								}
 								type="password"
 								id="confirmpassword"
 								name="confirmpassword"
@@ -381,11 +396,13 @@ export default function UserAuthentication({ params }: userauthprops) {
 								/>
 								<div
 									className="grid gap-1.5 leading-none"
-									style={{
-										"--highlightcolor": highlightTerms
-											? "#FF0000"
-											: "#000000",
-									} as any}
+									style={
+										{
+											"--highlightcolor": highlightTerms
+												? "#FF0000"
+												: "#000000",
+										} as any
+									}
 								>
 									<label
 										htmlFor="terms"
@@ -416,7 +433,7 @@ export default function UserAuthentication({ params }: userauthprops) {
 								</button>
 								<div className="flex flex-col items-start">
 									<p className="text-lg font-normal pb-2">
-										Already a member?
+										Have an account? Sign-In below!
 									</p>
 									<button
 										className="h-fit p-2 my-2 text-lg font-normal rounded-lg bg-black border-2 border-black hover:bg-white text-white hover:text-black transition-all duration-300 ease-in-out"

@@ -5,11 +5,11 @@ const db = require("../db-connection.js");
 router.post("/api", async (req, res) => {
   
 
-  const {fullName, country, address, bio, username, email, id} = req.body;
+  const {country, address, bio, username, email, id} = req.body;
   try {
     const updateProfileInfo = await db.none(
-      `UPDATE profile SET "name" = $1, "country" = $2, "address" = $3, "bio" = $4 WHERE "memberID" = $5`, 
-      [fullName, country, address, bio, id]
+      `UPDATE profile SET "country" = $2, "address" = $3, "bio" = $4 WHERE "memberID" = $5`, 
+      [country, address, bio, id]
     );
     const updateMemberInfo = await db.none(
         `UPDATE member SET "email" = $1, "username" = $2 WHERE "memberID" = $3`, [email, username, id]
