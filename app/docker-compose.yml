@@ -47,7 +47,7 @@ services:
     image: nextjs-docker-test
     build:
       context: .
-      dockerfile: Dockerfile.nextjs
+      dockerfile: /dockerfiles/next/Dockerfile
     volumes:
         - .:/app
         - /app/node_modules
@@ -59,7 +59,7 @@ services:
     image: expressjs-docker-test
     build:
       context: .
-      dockerfile: Dockerfile.expressjs
+      dockerfile: dockerfiles/express/Dockerfile
     volumes:
       - .:/app
     ports:
