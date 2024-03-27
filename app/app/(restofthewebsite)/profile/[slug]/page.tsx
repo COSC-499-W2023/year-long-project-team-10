@@ -10,6 +10,9 @@ import sendRequest from "../api/sendRequest";
 import acceptRequest from "../../requestsReceived/api/acceptRequest";
 import declineRequest from "../../requestsReceived/api/declineRequest";
 import cancelRequest from "../../requestsSent/api/cancelRequest";
+import GetProfilePicture from "../../getProfilePicture/api/getPFP";
+import blockUser from "../api/blockUser";
+import unblockUser from "../../blockedUsers/api/unblockUser";
 
   function EditProfile({params}: {params: {slug: string}}){
 
@@ -33,11 +36,13 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
     const [hasRequest, setHasRequest] = useState(-1);
     const [hasChat, setHasChat] = useState(-1);
 
+    //pfp
+    const [pfpInfo, setPfpInfo] = useState(``);
+
     const fetchData = async () => {
 
       const memberData: MemberFetch = await fetchUserData({ ...params });
       console.log(memberData);
-  
 
       if (memberData.status == 202) {
         console.log("User found, and is the logged in user.");
@@ -60,6 +65,10 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
 
       setHasChat(memberData.data.hasChat);
       setHasRequest(memberData.data.hasRequest);
+
+      const pfpPath = await GetProfilePicture({username: memberData.data.username});
+      setPfpInfo(pfpPath.data);
+      console.log("PFP PATH: " + pfpInfo + " " + pfpPath.data);
       
 
       setProfile({
@@ -73,6 +82,7 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
       });
 
       setTags(memberData.data.tags);
+
     }
 
 
@@ -81,6 +91,7 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
 
     useEffect(() => {fetchData();}, []);
     useEffect(() => {setTempProfile({ ...profile });}, [profile]);
+    //useEffect(() => {GetProfilePicture({username : profile.userName});});
 
     
 
@@ -174,6 +185,20 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
       });
     }
 
+    function handleBlockUser() {
+      blockUser({username: profile.userName}).then((res) => {
+        setHasRequest(3);
+      });
+    }
+
+    function handleUnblockUser() {
+      unblockUser({username: profile.userName}).then((res) => {
+        setHasRequest(0);
+      });
+    }
+
+  
+
     // Create function handle going to chat, which just redirects to the chat page
     function handleGoToChat() {
       router.push('/chats');
@@ -187,8 +212,8 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
       {/*Div for the left box that displays how the user's profile will look like when people view their profile*/}
       <div className="relative flex flex-col justify-start max-w-sm border-2 border-gray-400 rounded-xl p-10">
         <img
-          className="rounded-full w-72 h-72"
-          src={Penguin.src}
+          className="rounded-full w-100 h-100"
+          src={pfpInfo}
           alt="Profile Picture"
         />
         <div className="my-4">
@@ -350,16 +375,17 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
     {/* Buttons */}
 {!isUser && (
   <div>
-    {hasRequest === 0 && hasChat === 0 && (
+    {hasRequest === 0 && (
       <button 
       className="bg-blue-400 p-2 rounded-md text-white font-bold"
       onClick = {handleSendRequest}
       >
         Send Request
       </button>
+
     )}
 
-    {hasRequest === 1 && hasChat === 0 && (
+    {hasRequest === 1 && (
       <button 
       className="bg-red-400 p-2 rounded-md text-white font-bold"
       onClick = {handleCancelRequest}
@@ -368,7 +394,7 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
       </button>
     )}
 
-    {hasRequest === 2 && hasChat === 0 && (
+    {hasRequest === 2 &&(
       <div>
         <button 
         className="bg-green-400 p-2 rounded-md text-white font-bold"
@@ -384,8 +410,23 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
         </button>
       </div>
     )}
+    {hasRequest === 3 &&(
+      <div>
+        <button 
+        className="bg-blue-400 p-2 rounded-md text-white font-bold"
+        onClick = {handleUnblockUser}
+        >
+          Unblock User
+        </button>
+      </div>
+    )}
+    {hasRequest === 4 &&(
+      <div>
+        <p>This user has blocked you.</p>
+      </div>
+    )}
 
-    {hasRequest === 0 && hasChat === 1 && (
+    {hasChat === 1 && (
       <div>
         <button 
         className="bg-blue-400 p-2 rounded-md text-white font-bold"
@@ -396,6 +437,25 @@ import cancelRequest from "../../requestsSent/api/cancelRequest";
 
       </div>
     )}
+
+    {hasRequest === -1 && (
+      <div>
+        <p>loading...</p>
+      </div>
+    )}
+    
+    { (hasRequest === 0 || hasRequest == 1 || hasRequest == 2 || hasChat == 1) &&  (
+      <div>
+        <button
+        className="bg-red-400 p-2 rounded-md text-white font-bold"
+        onClick = {handleBlockUser}
+        >
+          Block User
+        </button>
+      </div>
+    )}
+
+    
 
   </div>
 )}

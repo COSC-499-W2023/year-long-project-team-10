@@ -8,7 +8,6 @@ CREATE TABLE member (
 );
 
 
-
 CREATE TABLE profile (
     "memberID" UUID PRIMARY KEY,
     "name" TEXT NOT NULL,
@@ -44,19 +43,6 @@ CREATE TABLE user_tag(
   	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE profile_picture (
-    "memberID" uuid,
-    image bytea,
-    foreign key ("memberID") references member("memberID")
-    	on delete cascade on update cascade
-);
-
-CREATE TABLE files (
-    "memberID" uuid,
-    "fileName" TEXT,
-    foreign key ("memberID") references member("memberID")
-    	on delete cascade on update cascade
-);
 
 CREATE TABLE chat(
   "chatID" SERIAL PRIMARY KEY,
@@ -87,5 +73,24 @@ CREATE TABLE message(
     ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY ("senderID") REFERENCES member("memberID")
     ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE file(
+  "fileID" SERIAL PRIMARY KEY,
+  "messageID" int NOT NULL,
+  "fileName" TEXT NOT NULL,
+  FOREIGN KEY ("messageID") REFERENCES message("messageID")
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE blocked_user(
+  "blockID" SERIAL PRIMARY KEY,
+  "blockerMemberID" uuid NOT NULL,
+  "blockedMemberID" uuid NOT NULL,
+  FOREIGN KEY ("blockerMemberID") REFERENCES member("memberID")
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY ("blockedMemberID") REFERENCES member("memberID")
+    ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
