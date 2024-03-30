@@ -18,7 +18,7 @@
 
 
 export async function fileGet(filename) {
-    const response = await fetch('http://localhost:6969/S3get/api', {
+    const response = await fetch(`http://${process.env.NAME}:6969/S3get/api`, {
         method: 'POST',
         body: JSON.stringify({ filename }), // Send only the filename
         headers: {

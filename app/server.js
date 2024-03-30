@@ -78,6 +78,9 @@ server.use("/S3upload", uploads3Routes);
 const s3GetRoutes = require("./app/routes/S3get");
 server.use("/S3get", s3GetRoutes);
 
+const health1get = require("./app/routes/health1");
+server.use("/health1", health1get);
+
 const fetchRequestsReceivedRoutes = require("./app/routes/requests/FetchRequestsReceived");
 server.use("/fetchRequestsReceived", fetchRequestsReceivedRoutes);
 
