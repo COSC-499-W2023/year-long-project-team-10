@@ -1,7 +1,7 @@
 //BARELY WORKS BARELY WORKS BARELY WORKS BARELY WORKS BARELY WORKS BARELY WORKS BARELY WORKS  
 
 export async function fileUpload(data){
-    const response = await fetch('http://localhost:6969/S3upload/api', {
+    const response = await fetch('http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/S3upload/api', {
         method: 'POST',
         body: data,
         // credentials: "include",

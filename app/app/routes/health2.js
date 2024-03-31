@@ -10,9 +10,9 @@ dotenv.config();
 router.post("/api", async (req, res) => {
 
     try{
-            console.log("request says 1:" , req.body)
-            console.log("in the server 1");
-            res.json({status: 200, body: "this message is from the server post request 1"});
+            console.log("request says 2:" , req.body)
+            console.log("in the server 2");
+            res.json({status: 200, body: "this message is from the server post request 2"});
 
     }catch(error) {
         console.error("Server very very bad:", error);
@@ -22,11 +22,11 @@ router.post("/api", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        console.log("Health check request received 1");
-        res.status(200).send("Server is healthy 1"); // Respond with 200 OK and a message
+        console.log("Health check request received 2");
+        res.status(200).send("Server is healthy 2"); // Respond with 200 OK and a message
     } catch (error) {
-        console.error("Error in health check 1:", error);
-        res.status(500).send("Server is not healthy 1"); // Respond with 500 Internal Server Error
+        console.error("Error in health check 2:", error);
+        res.status(500).send("Server is not healthy 2"); // Respond with 500 Internal Server Error
     }
 });
 

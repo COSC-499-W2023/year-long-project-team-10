@@ -21,7 +21,7 @@ const wssSession = new WebSocket.Server({ port: WEBSOCKET_PORT_SESSION }); // SE
 server.use(express.json());
 
 const corsOptions = {
-	origin: "http://localhost:3000",
+	origin: "http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com",
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 	credentials: true,
 	optionsSuccessStatus: 200,
@@ -80,6 +80,9 @@ server.use("/S3get", s3GetRoutes);
 
 const health1get = require("./app/routes/health1");
 server.use("/health1", health1get);
+
+const health2get = require("./app/routes/health2");
+server.use("/health2", health2get);
 
 const fetchRequestsReceivedRoutes = require("./app/routes/requests/FetchRequestsReceived");
 server.use("/fetchRequestsReceived", fetchRequestsReceivedRoutes);
