@@ -1,5 +1,5 @@
 export async function retrieveChats(){
-    const response = await fetch(`http://localhost:6969/retrieveChats/api`, {
+    const response = await fetch(`http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/retrieveChats/api`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

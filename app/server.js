@@ -116,7 +116,7 @@ server.use("/fetchBlockedUsers", fetchBlockedUsersRoutes);
 
 
 server.listen(HTTP_PORT, () => {
-	console.log("Server started on http://localhost:6969");
+	console.log("Server started on http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969");
 });
 
 

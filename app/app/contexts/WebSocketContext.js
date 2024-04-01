@@ -15,7 +15,7 @@ export const WebSocketProvider = ({ children }) => {
 
 	useEffect(() => {
 		// CONNECT TO SESSION WEBSOCKET SERVER
-		ws.current = new WebSocket(`ws://localhost:8989`);
+		ws.current = new WebSocket(`ws://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:8989`);
 
 		// IF OPEN, UPDATE ISCONNECTED CONTEXT.
 		ws.current.onopen = () => {

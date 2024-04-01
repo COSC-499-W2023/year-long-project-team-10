@@ -1,5 +1,5 @@
 export default async function blockUser(data){
-    const response = await fetch('http://localhost:6969/blockUser/api', {
+    const response = await fetch('http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/blockUser/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

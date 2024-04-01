@@ -1,5 +1,5 @@
 export async function fetchRequestsSent({searchQ, op}){
-    const response = await fetch(`http://localhost:6969/fetchRequestsSent/api?searchQ=${encodeURIComponent(searchQ)}&op=${encodeURIComponent(op)}`, {
+    const response = await fetch(`http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/fetchRequestsSent/api?searchQ=${encodeURIComponent(searchQ)}&op=${encodeURIComponent(op)}`, {
         credentials: "include",
     });
 

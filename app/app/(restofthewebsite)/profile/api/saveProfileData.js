@@ -1,5 +1,5 @@
 export async function updateProfileInfo(data){
-    const response = await fetch('http://localhost:6969/saveProfileData/api', {
+    const response = await fetch('http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/saveProfileData/api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(data),

@@ -1,5 +1,5 @@
 export async function createAProfile(data){
-    const response = await fetch('http://localhost:6969/createAProfile/api', {
+    const response = await fetch('http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/createAProfile/api', {
         method: 'POST',
         body: data,
         credentials: "include",
