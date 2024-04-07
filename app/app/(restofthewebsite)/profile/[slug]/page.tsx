@@ -7,12 +7,16 @@ import MemberFetch from "@/app/types/MemberFetch";
 import Penguin from "@/app/images/ExamplePenguin.jpeg";
 import updateProfileInfo from "../api/saveProfileData";
 import sendRequest from "../api/sendRequest";
-import acceptRequest from "../../requestsReceived/api/acceptRequest";
-import declineRequest from "../../requestsReceived/api/declineRequest";
-import cancelRequest from "../../requestsSent/api/cancelRequest";
+// import acceptRequest from "../../requestsReceived/api/acceptRequest";
+// import declineRequest from "../../requestsReceived/api/declineRequest";
+// import cancelRequest from "../../requestsSent/api/cancelRequest";
 import GetProfilePicture from "../../getProfilePicture/api/getPFP";
 import blockUser from "../api/blockUser";
-import unblockUser from "../../blockedUsers/api/unblockUser";
+import cancelRequest from "../../requests/api/cancelRequest";
+import acceptRequest from "../../requests/api/acceptRequest";
+import declineRequest from "../../requests/api/declineRequest";
+import unblockUser from "../../requests/api/unblockUser";
+// import unblockUser from "../../blockedUsers/api/unblockUser";
 
   function EditProfile({params}: {params: {slug: string}}){
 
