@@ -15,18 +15,19 @@ services:
     image: nextjs-docker-test
     build:
       context: .
-      dockerfile: Dockerfile.nextjs
+      dockerfile: /dockerfiles/next/Dockerfile
     volumes:
         - .:/app
         - /app/node_modules
         - /app/.next
     ports:
       - "3000:3000"
+      
   expressjs:
     image: expressjs-docker-test
     build:
       context: .
-      dockerfile: Dockerfile.expressjs
+      dockerfile: /dockerfiles/express/Dockerfile
     volumes:
       - .:/app
     ports:

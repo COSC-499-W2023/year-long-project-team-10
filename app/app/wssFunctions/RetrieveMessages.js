@@ -12,11 +12,11 @@ const secretAccessKey = process.env.SECRET_ACCESS_KEY
 const sessionToken = process.env.SESSION_TOKEN
 
 const s3Object = new S3Client({ //creates a s3 object given the environment variables
-    credentials:{
-        accessKeyId: accessKey,
-        secretAccessKey: secretAccessKey,
-        sessionToken: sessionToken,
-    },
+    // credentials:{
+    //     accessKeyId: accessKey,
+    //     secretAccessKey: secretAccessKey,
+    //     sessionToken: sessionToken,
+    // },
     region: bucketRegion
 });
 
