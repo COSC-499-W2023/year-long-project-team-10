@@ -23,7 +23,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsOptions = {
-	origin: `http://${process.env.NEXT_PUBLIC_DNS}:3000`,
+	origin: `http://${process.env.NEXT_PUBLIC_DNS}`,
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 	credentials: true,
 	optionsSuccessStatus: 200,
