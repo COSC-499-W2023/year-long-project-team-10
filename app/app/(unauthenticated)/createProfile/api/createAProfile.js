@@ -2,7 +2,7 @@ export async function createAProfile(data){
 const dotenv = require("dotenv");
 dotenv.config();
 
-    const response = await fetch(`http://${process.env.NEXT_PUBLIC_DNS}:6969/createAProfile/api`, {
+    const response = await fetch(`http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/createAProfile/api`, {
         method: 'POST',
         body: data,
         credentials: "include",

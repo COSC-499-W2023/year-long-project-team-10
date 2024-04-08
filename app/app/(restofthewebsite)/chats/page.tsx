@@ -79,7 +79,7 @@ export default function Chats() {
 	//  INFORMATION: WEBSOCKETS
 
 	useEffect(() => {
-		ws.current = new WebSocket(`ws://${process.env.NEXT_PUBLIC_DNS}:7979`);
+		ws.current = new WebSocket(`ws://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:7979`);
 		ws.current.onopen = () => {
 			console.log("WebSocket connection opened");
 		};

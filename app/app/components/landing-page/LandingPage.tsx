@@ -6,10 +6,10 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import PlaceHolderWebsite from "@/public/PlaceholderWebsite.svg";
 import placeholder from "@/public/placeholder.png"
 import Greetings from "@/public/Greetings.svg";
-import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
 
 export default function LandingPage() {
-	const { toast } = useToast();
+	// const { toast } = useToast();
 	const imageRef = useRef(null);
 	const imageRefB = useRef(null);
 	const imageRefC = useRef(null);

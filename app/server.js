@@ -23,7 +23,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsOptions = {
-	origin: `http://${process.env.NEXT_PUBLIC_DNS}`,
+	origin: `http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com`,
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 	credentials: true,
 	optionsSuccessStatus: 200,
@@ -71,6 +71,8 @@ server.use("/signin", signinRoutes);
 const fetchUserDataRoutes = require("./app/routes/FetchUserData");
 server.use("/fetchUserData", fetchUserDataRoutes);
 
+const health1get = require("./app/routes/health1");
+server.use("/health1", health1get);
 
 const fetchSearchResultsRoutes = require("./app/routes/FetchSearchResults");
 server.use("/fetchSearchResults", fetchSearchResultsRoutes);
@@ -129,7 +131,7 @@ server.use("/checkAnswer", checkSecurityAnswerRoutes);
 
 
 server.listen(HTTP_PORT, () => {
-	console.log(`Server started on http://${process.env.NEXT_PUBLIC_DNS}:6969`);
+	console.log(`Server started on http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969`);
 });
 
 

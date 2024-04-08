@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
     console.log("REQUEST FOR RETRIEVE CHATS WITH SEARCHQ: " + searchQuery);
-    const response = await fetch(`http://${process.env.NEXT_PUBLIC_DNS}:6969/retrieveChats/api?searchQ=${encodeURIComponent(searchQuery)}`, {
+    const response = await fetch(`http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/retrieveChats/api?searchQ=${encodeURIComponent(searchQuery)}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

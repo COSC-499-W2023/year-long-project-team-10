@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { WebSocketProvider } from "./contexts/WebSocketContext";
-import { Toaster } from "@/components/ui/toaster";
+// import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -119,7 +119,7 @@ export default function RootLayout({ children }: LayoutProps) {
 			>
 				<WebSocketProvider>
 					{children}
-					<Toaster />
+					{/* <Toaster /> */}
 				</WebSocketProvider>
 			</body>
 		</html>

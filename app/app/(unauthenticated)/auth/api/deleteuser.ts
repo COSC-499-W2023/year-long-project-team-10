@@ -4,7 +4,7 @@ export default async function DeleteUser(values: { username: string }) {
 const dotenv = require("dotenv");
 dotenv.config();
 
-	const response = await fetch(`http://${process.env.NEXT_PUBLIC_DNS}:6969/deleteuser/api`, {
+	const response = await fetch(`http://499-new-lb-420614602.ca-central-1.elb.amazonaws.com:6969/deleteuser/api`, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(values),
